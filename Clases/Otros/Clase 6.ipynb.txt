@@ -1,0 +1,389 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "2dc8df0e-f168-4e55-8766-f9f0df40ddcf",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import numpy as np\n",
+    "import pandas as pd"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "4818737a",
+   "metadata": {},
+   "source": [
+    "# Prueba Z"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "id": "45bc0129",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import statsmodels.stats.proportion as proportion"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "id": "51f59ae0-6e7f-4bb6-bf8d-6eab8407bba7",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Datos de ejemplo\n",
+    "num_exitos = 120\n",
+    "num_ensayos = 200\n",
+    "p_hipotesis = 0.5"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "id": "134a81bc",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Realizar la prueba Z\n",
+    "z_statistic, p_value = proportion.proportions_ztest(num_exitos, num_ensayos, p_hipotesis)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "id": "e6832123",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "(2.886751345948128, 0.0038924171227786367)"
+      ]
+     },
+     "execution_count": 5,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "z_statistic, p_value"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "21de2e2a",
+   "metadata": {},
+   "source": [
+    "# Prueba t para la media de una muestra"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "id": "40058307",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from scipy.stats import ttest_1samp"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "id": "478d11da",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Datos de ejemplo\n",
+    "datos = np.array([15, 17, 20, 23, 18, 19, 21, 22, 16, 19])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "id": "124c3445",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Valor a comparar\n",
+    "valor_hipotesis = 20"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "id": "27eb1740",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Realizar la prueba t\n",
+    "t_statistic, p_value = ttest_1samp(datos, valor_hipotesis)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 22,
+   "id": "b7fd3cb4",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "(-10.370987274564573, 0.0005204146573832532)"
+      ]
+     },
+     "execution_count": 22,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "t_statistic, p_value"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "195f0422",
+   "metadata": {},
+   "source": [
+    "# Prueba t para comparar dos medias de dos muestras independientes "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "id": "1486469e",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from scipy.stats import ttest_ind"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "id": "ecacd72d",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Datos de ejemplo\n",
+    "datos_grupo1 = np.array([15, 17, 20, 23, 18, 19, 21, 22, 16, 19])\n",
+    "datos_grupo2 = np.array([18, 20, 22, 25, 21, 23, 24, 23, 19, 22])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "id": "53d2ea5a",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Realizar la prueba t\n",
+    "t_statistic, p_value = ttest_ind(datos_grupo1, datos_grupo2)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 23,
+   "id": "fc9dbff3",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "(-10.370987274564573, 0.0005204146573832532)"
+      ]
+     },
+     "execution_count": 23,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "t_statistic, p_value"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "f480f9a6",
+   "metadata": {},
+   "source": [
+    "# Prueba t para comparar dos medias relacionadas"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "id": "a88838f2",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from scipy.stats import ttest_rel"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "id": "14c7214f",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Datos de ejemplo\n",
+    "datos_antes = np.array([15, 17, 20, 23, 18, 19, 21, 22, 16, 19])\n",
+    "datos_despues = np.array([18, 20, 22, 25, 21, 23, 24, 23, 19, 22])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 15,
+   "id": "875a079e",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Realizar la prueba t\n",
+    "t_statistic, p_value = ttest_rel(datos_antes, datos_despues)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "c886fbd7",
+   "metadata": {},
+   "source": [
+    "# Prueba chi-cuadrado para independencia de variables categóricas"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "id": "a3a4efe4",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from scipy.stats import chi2_contingency"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "id": "0b174667",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Datos de ejemplo en una tabla de contingencia\n",
+    "observados = np.array([[10, 20], [30, 40]])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 18,
+   "id": "19a9eefc",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Realizar la prueba de chi-cuadrado\n",
+    "chi2, p_value, dof, expected = chi2_contingency(observados)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 24,
+   "id": "9b54bfbc",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "(0.4464285714285714,\n",
+       " 0.0005204146573832532,\n",
+       " 1,\n",
+       " array([[12., 18.],\n",
+       "        [28., 42.]]))"
+      ]
+     },
+     "execution_count": 24,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "chi2, p_value, dof, expected"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "f80eaa4c",
+   "metadata": {},
+   "source": [
+    "# Prueba F para ANOVA"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 19,
+   "id": "15be5790",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from scipy.stats import f_oneway"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 20,
+   "id": "e88c973c",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Datos de ejemplo\n",
+    "datos_grupo1 = np.array([15, 17, 20, 23, 18, 19, 21, 22, 16, 19])\n",
+    "datos_grupo2 = np.array([18, 20, 22, 25, 21, 23, 24, 23, 19, 22])\n",
+    "datos_grupo3 = np.array([20, 22, 24, 27, 23, 25, 26, 25, 21, 24])\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 21,
+   "id": "c0c5f45c",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Realizar ANOVA\n",
+    "f_statistic, p_value = f_oneway(datos_grupo1, datos_grupo2, datos_grupo3)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "5cca5b34",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.9.13"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
